@@ -1,6 +1,5 @@
 const express = require('express')
 const services = require('./src/services.js')
-const Service = require('./src/services.js')
 
 const app = express()
 const PORT = 3000
@@ -10,13 +9,13 @@ app.use(express.json())
 app.get('/', function (req, res) {
   res.json({
     message: 'Lista de usuarios',
-    body: Service.getUsers()
+    body: services.getUsers()
   })
 })
 
 app.get('/:id', function (req, res) {
   const { params: { id } } = req
-  res.json(Service.getUser(id))
+  res.json(services.getUser(id))
 })
 
 app.post('/', (req, res) => {
@@ -37,7 +36,7 @@ app.put('/:id', (req, res) => {
 
 app.delete('/:id', (req, res) => {
   const { params: { id } } = req
-  res.json(Service.deleteUser(id))
+  res.json(services.deleteUser(id))
 })
 
 app.listen(PORT, () => console.log(`Servidor escuchando en http://localhost:${PORT}`))
